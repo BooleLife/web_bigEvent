@@ -60,7 +60,6 @@ $(function() {
             }
         })
     })
-    console.log(this)
 
     // 监听登录表单的提交的事件
     $('#formLogin').submit(function(e) {
