@@ -48,7 +48,6 @@ $(function() {
                 if (res.status !== 0) {
                     return layer.msg('更新头像失败')
                 }
-                console.log(res)
                 layer.msg('更新头像成功')
                 window.parent.getUserInfo()
             }
