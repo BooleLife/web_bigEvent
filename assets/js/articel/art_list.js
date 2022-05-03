@@ -1,7 +1,7 @@
 $(function() {
-    let layer = layui.layer
-    let form = layui.form
-    let laypage = layui.laypage
+    const layer = layui.layer
+    const form = layui.form
+    const laypage = layui.laypage
 
     // 定义查询参数对象
     let q = {
@@ -15,6 +15,7 @@ $(function() {
 
     // 初始化文章表格的方法
     function initTable() {
+
         $.ajax({
             method: 'GET',
             url: '/my/article/list',
@@ -113,9 +114,12 @@ $(function() {
         })
 
     }
+
     $('tbody').on('click', '.btn-delete', function() {
         let id = $(this).attr('data-id') //获取文章id
 
+        // 通过一页的删除按钮的个数,判断是否需要页面减一
+        // 如果一页上面只有一个删除按钮了,则删除了这条数据之后页面值就需要减一
         let len = $('.btn-delete').length
 
         layer.confirm('是否确认删除？', { icon: 3, title: '提示' }, function(index) {
@@ -128,13 +132,13 @@ $(function() {
                     }
                     layer.msg('删除文章成功')
                     if (len === 1) {
+                        // 如果这是最后一页的数据了,这页码值不能再减了
                         q.pagenum = q.pagenum === 1 ? 1 : q.pagenum - 1
                     }
                     initTable()
                 }
             })
             layer.close(index)
-
         })
 
     })

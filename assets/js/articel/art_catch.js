@@ -2,8 +2,7 @@ $(function() {
     const layer = layui.layer
     const form = layui.form
 
-    initArtCateList()
-
+    // 初始化文章列表的函数
     function initArtCateList() {
         $.ajax({
             method: 'GET',
@@ -12,14 +11,21 @@ $(function() {
                 if (res.status !== 0) {
                     return layer.msg('获取文章列表失败')
                 }
-                let htmlStr = template('tpl-table', res)
-                $('tbody').html(htmlStr)
+                let htmlStr = template('tpl-table', res) // 调用template模板的template函数
+                $('tbody').html(htmlStr) // 将其展示到页面上
             }
         })
     }
 
+    // 初始化文章列表
+    initArtCateList()
+
+    // 声明一个变量用保存layui 弹出框的索引,便于关闭
     let indexAdd = null
+
+    // 为添加按钮绑定单击事件
     $('#btnAddCate').on('click', function() {
+
         indexAdd = layer.open({
             type: 1,
             area: ['500px', '250px'],
@@ -41,12 +47,17 @@ $(function() {
                 layer.msg('新增数据成功')
 
                 layer.close(indexAdd)
+
+                // 添加数据之后需要重新渲染页面
                 initArtCateList()
             }
         })
     })
 
+    // 声明一个变量用保存layui 弹出框的索引,便于关闭
     let indexEdit = null
+
+    // 运用事件委托的方式为编辑按钮绑定点击事件
     $('tbody').on('click', '#btn-edit', function() {
         indexEdit = layer.open({
             type: 1,
@@ -56,15 +67,18 @@ $(function() {
         })
 
         let id = $(this).attr('data-id')
+
         $.ajax({
             method: 'GET',
             url: '/my/article/cates/' + id,
             success: function(res) {
+                // 给编辑的表单form赋上原本的值
                 form.val('form-edit', res.data)
             }
         })
     })
 
+    // 运用事件委托的方式为表单绑定点击事件
     $('body').on('submit', '#form-edit', function(e) {
         e.preventDefault()
         $.ajax({
@@ -83,10 +97,11 @@ $(function() {
         })
     })
 
+    // 运用事件委托的方式为删除按钮绑定点击事件
     $('tbody').on('click', '#btn-delete', function() {
-        // console.log('ok')
         let id = $(this).attr('data-id')
         layer.confirm('是否确认删除？', { icon: 3, title: '提示' }, function(index) {
+
             $.ajax({
                 method: 'GET',
                 url: '/my/article/deletecate/' + id,

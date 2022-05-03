@@ -22,7 +22,9 @@
 
     <!-- 登录注册区域 -->
     <div class="loginAndRegBox">
+        <!-- 登录表单的标题 -->
         <div class="titleBox"></div>
+
         <!-- 登录的表单 -->
         <div class="loginBox">
             <form class="layui-form" id="formLogin">
@@ -43,12 +45,11 @@
                     <button class="layui-btn layui-btn-fluid layui-btn-normal" lay-submit>登录</button>
                 </div>
 
-                <!-- 去注册 -->
+                <!-- 返回到注册表单 -->
                 <div class="layui-form-item links">
                     <a href="javascript:;" id="linkReg">注册</a>
                 </div>
             </form>
-
         </div>
 
         <!-- 注册的的表单 -->
@@ -72,21 +73,21 @@
                     <input type="password" name="repassword" required lay-verify="required|repwd" placeholder="再次确认密码" autocomplete="off" class="layui-input">
                 </div>
 
-                <!-- 登录按钮 -->
+                <!-- 注册按钮 -->
                 <div class="layui-form-item">
                     <button class="layui-btn layui-btn-fluid layui-btn-normal" lay-submit>注册</button>
                 </div>
 
-                <!-- 去登录-->
+                <!-- 返回到登录表单-->
                 <div class="layui-form-item links">
                     <a href="javascript:;" id="linkLogin">登录</a>
                 </div>
             </form>
-
         </div>
     </div>
     <!-- 导入 layui 的 js 文件 -->
     <script src="./assets/lib/layui/layui.all.js"></script>
+
     <!-- 导入jquery -->
     <script src="./assets/lib/jquery.js"></script>
 

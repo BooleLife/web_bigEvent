@@ -9,8 +9,8 @@ $(function() {
 
     // 2. 裁剪选项
     let options = {
-        aspectRatio: 10 / 7,
-        preview: '.img-preview'
+        aspectRatio: 10 / 7, //裁剪的区域的宽高比
+        preview: '.img-preview' //指定预览区域
     }
 
     // 3. 初始化裁剪区域
@@ -61,6 +61,7 @@ $(function() {
     $('#form-pub').on('submit', function(e) {
         e.preventDefault()
 
+        // 将表单的数据放置到 FormData 对象中
         let fd = new FormData($(this)[0])
         fd.append('state', art_state)
 
@@ -76,7 +77,8 @@ $(function() {
 
                 // 5. 将文件对象，存储到 fd 中
                 fd.append('cover_img', blob)
-                    // 6. 发起 ajax 数据请求
+
+                // 6. 发起 ajax 数据请求
                 publishArticle(fd)
             })
     })
@@ -94,6 +96,8 @@ $(function() {
                 }
                 layer.msg('发布文章成功')
                 location.href = '/artice/art_list.html'
+                window.parent.$('.layui-this').removeClass('layui-this')
+                window.parent.$('#list').addClass('layui-this')
             }
         })
     }

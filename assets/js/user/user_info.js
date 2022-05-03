@@ -1,12 +1,10 @@
 $(function() {
-    let form = layui.form
-    let layer = layui.layer
+    const form = layui.form
+    const layer = layui.layer
 
     form.verify({
         nickname: function(value) {
-            if (value.length > 6) {
-                return '昵称长度必须在 1~6 个字符之间'
-            }
+            if (value.length > 6) return '昵称长度必须在 1~6 个字符之间'
         }
     })
     initUserInfo()
@@ -16,10 +14,7 @@ $(function() {
             method: 'GET',
             url: '/my/userinfo',
             success: function(res) {
-                if (res.status !== 0) {
-                    return layer.msg('获取用户信息失败')
-                }
-                // console.log(res)
+                if (res.status !== 0) return layer.msg('获取用户信息失败')
                 form.val("formTest", res.data)
             }
         })
@@ -43,12 +38,10 @@ $(function() {
             url: '/my/userinfo',
             data: $(this).serialize(),
             success: function(res) {
-                if (res.status !== 0) {
-                    return layer.msg('修改用户信息失败')
-                }
+                if (res.status !== 0) return layer.msg('修改用户信息失败')
                 layer.msg('修改用户信息成功')
-                console.log(window)
-                    // 在子页面中调用父页面的方法
+
+                // 在子页面中调用父页面的方法
                 window.parent.getUserInfo()
             }
         })

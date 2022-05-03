@@ -19,9 +19,7 @@ $(function() {
     })
     $('#file').on('change', function(e) {
         let filelist = e.target.files
-        if (filelist.length === 0) {
-            layer.msg('请选择照片')
-        }
+        if (filelist.length === 0) return layer.msg('请选择照片')
 
         let newImgURL = URL.createObjectURL(filelist[0])
         $image
@@ -45,10 +43,9 @@ $(function() {
                 avatar: dataURL
             },
             success: function(res) {
-                if (res.status !== 0) {
-                    return layer.msg('更新头像失败')
-                }
+                if (res.status !== 0) return layer.msg('更新头像失败')
                 layer.msg('更新头像成功')
+
                 window.parent.getUserInfo()
             }
         })
